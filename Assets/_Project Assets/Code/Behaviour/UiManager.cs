@@ -7,7 +7,9 @@ public enum CanvasName
     MAIN_MENU,
     WARNING,
     NOTICE,
-    UPDATE_AVAILABLE
+    UPDATE_AVAILABLE,
+    SCANNING,
+    TACK_LIST
 }
 
 public class UiManager : MonoBehaviour

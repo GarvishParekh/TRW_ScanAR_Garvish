@@ -5,11 +5,6 @@ public class ScanningCanvas : MonoBehaviour, ICanvasAnimation
     [SerializeField] private GameObject HeaderObject;
     [SerializeField] private GameObject scanner;
 
-    private void Start()
-    {
-        PlayAnimation();
-    }
-
     public void PlayAnimation()
     {
         ResetAnimation();
