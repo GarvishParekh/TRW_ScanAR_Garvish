@@ -1,12 +1,14 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.ARCore;
 
 public class TrackManager : MonoBehaviour
 {
     public static TrackManager instance;
     [Header ("<size=15>[SCRIPTABLE]")]
     [SerializeField] private TrackData trackData;
+    [SerializeField] private ArSession arSession;
 
     [Header ("<size=15>[COMPONENTS]")]
     [SerializeField] private Transform cellSpawnPoint;

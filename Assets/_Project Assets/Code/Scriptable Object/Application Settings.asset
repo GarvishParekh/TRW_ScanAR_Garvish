@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Application Settings
   m_EditorClassIdentifier: 
   appCurrentVersion: 0
-  appLiveVersion: 1
+  appLiveVersion: 0

@@ -16,7 +16,8 @@ public class ImageTracking : MonoBehaviour
 
     private void Awake()
     {
-        trackedImages = GetComponent<ARTrackedImageManager>(); 
+        trackedImages = GetComponent<ARTrackedImageManager>();
+ 
     }
 
     private void Start()
@@ -27,6 +28,11 @@ public class ImageTracking : MonoBehaviour
     private void OnEnable()
     {
         trackedImages.trackedImagesChanged += OnTackedImageChanges;
+    }
+
+    private void OnDisable()
+    {
+        trackedImages.trackedImagesChanged -= OnTackedImageChanges;
     }
 
     private void OnTackedImageChanges(ARTrackedImagesChangedEventArgs args)

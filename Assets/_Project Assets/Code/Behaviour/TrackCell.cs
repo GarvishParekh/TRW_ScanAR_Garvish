@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TrackCell : MonoBehaviour
 {
@@ -13,5 +14,12 @@ public class TrackCell : MonoBehaviour
         trackName = _trackName;
         trackNameText.text = trackName;
         url = _url;
+    }
+
+    public void _PlayVideo()
+    {
+        var xrManagerSettings = UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager;
+        xrManagerSettings.DeinitializeLoader();
+        SceneManager.LoadScene(2);
     }
 }

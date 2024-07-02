@@ -13,6 +13,6 @@ public class VideplayMenuUIHandler : MonoBehaviour
 
     private void BackToMainMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
