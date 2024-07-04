@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662f76cacf6d8a441b3f3e41aa354af6, type: 3}
   m_Name: Audio Data
   m_EditorClassIdentifier: 
-  buttonClickSound: {fileID: 8300000, guid: 0e030d634a115914aa57ce57a4cd387d, type: 3}
+  buttonClickSound: {fileID: 8300000, guid: 9d0113dd16699ce4ea3c58dd422fdc1f, type: 3}
+  bookFoundSound: {fileID: 8300000, guid: 5493c6d5b3a266a4d871a8a228bb41be, type: 3}
+  scanningSound: {fileID: 8300000, guid: 098378a29aeaaa74e9f20482179a9979, type: 3}

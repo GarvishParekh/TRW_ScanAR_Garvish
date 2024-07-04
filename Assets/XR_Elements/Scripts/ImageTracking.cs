@@ -7,7 +7,12 @@ using UnityEngine.XR.ARSubsystems;
 public class ImageTracking : MonoBehaviour
 {
     UiManager uiManager;
+    SfxManager sfxManager;
 
+    [Header("<size=15>SCRIPTABLE")]
+    [SerializeField] private VideoPlayerData videoPlayerData;
+
+    [Space]
     private ARTrackedImageManager trackedImages;
     [SerializeField] private List<GameObject> ArPrefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> ArObjects = new List<GameObject>();
@@ -17,12 +22,12 @@ public class ImageTracking : MonoBehaviour
     private void Awake()
     {
         trackedImages = GetComponent<ARTrackedImageManager>();
- 
     }
 
     private void Start()
     {
         uiManager = UiManager.instance;
+        sfxManager = SfxManager.instance;
     }
 
     private void OnEnable()
@@ -48,10 +53,13 @@ public class ImageTracking : MonoBehaviour
             {
                 if (tackedImage.referenceImage.name == arPrefabs.name)
                 {
+                    videoPlayerData.currentBookName = arPrefabs.name;   
                     var newPrefab = Instantiate(arPrefabs, tackedImage.transform);
                     ArObjects.Add(newPrefab);
                     found = true;
+
                     uiManager.OpenCanvas(CanvasName.TACK_LIST);
+                    sfxManager?.PlayBookFoundSound();
                 }
             }
         }

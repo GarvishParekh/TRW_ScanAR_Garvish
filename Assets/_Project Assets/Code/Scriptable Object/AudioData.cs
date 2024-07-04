@@ -4,4 +4,6 @@ using UnityEngine;
 public class AudioData : ScriptableObject
 {
     public AudioClip buttonClickSound;
+    public AudioClip bookFoundSound;
+    public AudioClip scanningSound;
 }

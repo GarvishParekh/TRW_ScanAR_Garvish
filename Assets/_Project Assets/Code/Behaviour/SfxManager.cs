@@ -3,8 +3,10 @@ using UnityEngine;
 [RequireComponent (typeof(AudioSource))]
 public class SfxManager : MonoBehaviour
 {
-    AudioSource audioSource;
     public static SfxManager instance;
+
+    AudioSource audioSource;
+    
     public AudioData audioData;
 
     void Awake()
@@ -23,5 +25,10 @@ public class SfxManager : MonoBehaviour
     public void PlayClickSound()
     {
         audioSource.PlayOneShot(audioData.buttonClickSound);
+    }
+
+    public void PlayBookFoundSound()
+    {
+        audioSource.PlayOneShot(audioData.bookFoundSound);
     }
 }

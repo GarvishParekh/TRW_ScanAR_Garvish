@@ -33,13 +33,13 @@ public class MainMeniUiHandler : MonoBehaviour
     public void _AgreeButton()
     {
         uiManager.ClosePopup(CanvasName.WARNING);
-        Invoke(nameof(ChangeToVideoplayer), 0.2f);
         sfxManager.PlayClickSound();
+        Invoke(nameof(ChangeToScanningScene), 0.2f);
     }
 
-    public void ChangeToVideoplayer()
+    public void ChangeToScanningScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneData.SCANNING);
     }
 
     public void AssignAboutUs()

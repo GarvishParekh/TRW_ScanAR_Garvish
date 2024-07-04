@@ -2,8 +2,15 @@ using UnityEngine;
 
 public class ScanningCanvas : MonoBehaviour, ICanvasAnimation
 {
+    SfxManager sfxManager;
+
     [SerializeField] private GameObject HeaderObject;
     [SerializeField] private GameObject scanner;
+
+    private void Start()
+    {
+        sfxManager = SfxManager.instance;
+    }
 
     public void PlayAnimation()
     {
