@@ -83,4 +83,31 @@ public class jsonConverter : MonoBehaviour
             SceneManager.LoadScene(SceneData.MAINMENU);
         }
     }
+
+    public TracksData[] FetchTracks(string bookName, float bookPageNumber)
+    {
+        switch (bookName)
+        {
+            case "TRW_Starter":
+                foreach (PageData pageInfo in data.bookData[0].page)
+                {
+                    if (pageInfo.pageId == bookPageNumber)
+                    {
+                        return data.bookData[0].page[pageInfo.pageId].track;
+                    }
+                }
+            break;
+
+            case "TRW_1":
+                foreach (PageData pageInfo in data.bookData[0].page)
+                {
+                    if (pageInfo.pageId == bookPageNumber)
+                    {
+                        return data.bookData[0].page[pageInfo.pageId].track;
+                    }
+                }
+                break;
+        }
+        return null;
+    }
 }

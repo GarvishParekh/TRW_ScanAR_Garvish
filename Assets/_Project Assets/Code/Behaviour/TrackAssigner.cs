@@ -3,8 +3,12 @@ using UnityEngine;
 
 public enum BookID
 {
-    Reader1,
-    Reader2
+    Trw_Yellow,
+    Trw_Red,
+    Trw_Blue,
+    Trw_Green,
+    Trw_Reader_1,
+    Trw_Reader_2
 }
 public class TrackAssigner : MonoBehaviour
 {
@@ -24,5 +28,6 @@ public class TrackAssigner : MonoBehaviour
     public void SetMyTrack()
     {
         trackManager._SetTrackData(trackData);
+        //Yellow_1.3
     }
 }
