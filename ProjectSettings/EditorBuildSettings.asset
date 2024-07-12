@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project Assets/Scenes/PlayVideo.unity
     guid: 2b6c73b04dfb2400cb64b1d09ae8265e
+  - enabled: 0
+    path: Assets/_Project Assets/Dummy API Call/Dummy Api scene.unity
+    guid: ca9063964736b0e4a8520b778df36f4d
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: bb544340f729cfe4d8f7b577bb0a68fc, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: e2624698037be6c40b1774a6d38c431f, type: 2}

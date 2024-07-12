@@ -2,13 +2,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.Video;
 
 public class VideplayMenuUIHandler : MonoBehaviour
 {
     [Header ("<size=15>SCRIPTABLE")]
     [SerializeField] private VideoPlayerData videoPlayerData;
 
-    [Header ("<size=15>COMPOENENTS")]
+    [Header("<size=15>COMPOENENTS")]
+    [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private List<GameObject> videoElements = new List<GameObject>();
     [SerializeField] private List<GameObject> audioElements = new List<GameObject>();
 
@@ -21,6 +23,12 @@ public class VideplayMenuUIHandler : MonoBehaviour
     [SerializeField] private VideoPlayerProgress videoPlayerprogress;
 
     [SerializeField] private bool showVideo = true;
+
+    private void Awake()
+    {
+        videoPlayer.url = videoPlayerData.videoDirectLink;
+        videoPlayer.Play();
+    }
 
     private void Start()
     {

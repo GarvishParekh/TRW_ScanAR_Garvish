@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3754278238078737430}
   - component: {fileID: 7174149062438159638}
   m_Layer: 0
-  m_Name: Track Card
+  m_Name: Track Card (Dummy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,9 +150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videplayerData: {fileID: 11400000, guid: 87610cf3ac7e42f468fb9dbab680a142, type: 2}
   trackNameText: {fileID: 3636365296889349335}
-  trackName: 
-  trackIndex: 0
-  url: 
+  trackName: TRW_Reader_1
+  trackIndex: 1
+  url: TRW_Reader_1/Page_1/Track_1/TRW_Reader_1_Page_1_V.mp4
 --- !u!114 &7174149062438159638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dummy Track
+  m_text: Tack name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4bc7276ee1d4bc249b4c7d8086c09b1b, type: 2}
   m_sharedMaterial: {fileID: -1841303067181770360, guid: 4bc7276ee1d4bc249b4c7d8086c09b1b, type: 2}

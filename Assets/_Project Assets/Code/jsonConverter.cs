@@ -13,8 +13,8 @@ public class jsonConverter : MonoBehaviour
 
     [Header("<size=15>USER JSON")]
     [SerializeField] private string jsonURL;
+    public TrwData data = new TrwData();
     [SerializeField] private string jsonString;
-    [SerializeField] private TrwData data = new TrwData();
 
     private void Awake()
     {
@@ -82,32 +82,5 @@ public class jsonConverter : MonoBehaviour
             yield return new WaitForSeconds(1);
             SceneManager.LoadScene(SceneData.MAINMENU);
         }
-    }
-
-    public TracksData[] FetchTracks(string bookName, float bookPageNumber)
-    {
-        switch (bookName)
-        {
-            case "TRW_Starter":
-                foreach (PageData pageInfo in data.bookData[0].page)
-                {
-                    if (pageInfo.pageId == bookPageNumber)
-                    {
-                        return data.bookData[0].page[pageInfo.pageId].track;
-                    }
-                }
-            break;
-
-            case "TRW_1":
-                foreach (PageData pageInfo in data.bookData[0].page)
-                {
-                    if (pageInfo.pageId == bookPageNumber)
-                    {
-                        return data.bookData[0].page[pageInfo.pageId].track;
-                    }
-                }
-                break;
-        }
-        return null;
     }
 }

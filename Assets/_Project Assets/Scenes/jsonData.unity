@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   informationText: {fileID: 2038466632}
-  jsonURL: https://cf-templates-1m8i2fjinibz6-ap-south-1.s3.ap-south-1.amazonaws.com/trw/MasterBook.json
+  jsonURL: https://trw-scanar.s3.ap-south-1.amazonaws.com/API_CONFIG/BookMaster.json
   jsonString: 
   data:
     androidVersion: 

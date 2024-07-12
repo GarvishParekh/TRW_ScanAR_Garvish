@@ -13,13 +13,11 @@ public enum BookID
 public class TrackAssigner : MonoBehaviour
 {
     [SerializeField] private VideoPlayerData videoplayerData;
-    TrackManager trackManager;
     [SerializeField] private TrackData trackData;
     [SerializeField] private BookID bookID;
 
     private void Start()
     {
-        trackManager = TrackManager.instance;
         SetMyTrack();
 
         videoplayerData.currentBookName = videoplayerData.bookName[(int)bookID];
@@ -27,7 +25,6 @@ public class TrackAssigner : MonoBehaviour
 
     public void SetMyTrack()
     {
-        trackManager._SetTrackData(trackData);
-        //Yellow_1.3
+
     }
 }

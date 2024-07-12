@@ -2686,6 +2686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   videoPlayerData: {fileID: 11400000, guid: 87610cf3ac7e42f468fb9dbab680a142, type: 2}
+  videoPlayer: {fileID: 928526529}
   videoElements:
   - {fileID: 848653999}
   audioElements:

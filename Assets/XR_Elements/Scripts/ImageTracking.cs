@@ -3,7 +3,6 @@ using UnityEngine;
 
 using UnityEngine.XR.ARFoundation;
 using System.Collections.Generic;
-using UnityEngine.XR.ARSubsystems;
 
 public class ImageTracking : MonoBehaviour
 {
@@ -14,9 +13,12 @@ public class ImageTracking : MonoBehaviour
     [Header("<size=15>USER INTERFACE")]
     [SerializeField] private TMP_Text trackedNameText;
     [SerializeField] private TMP_Text firstLastText;
+    [SerializeField] private TMP_Text bookNameText;
 
     [Header("<size=15>TRACK DATA")]
-    [SerializeField] private TracksData[] trackData;
+    [SerializeField] private string pageName;
+    [SerializeField] private string playLoadUrl;
+    [SerializeField] private BookData bookData = new BookData();
     [SerializeField] private TrackCell trackCell;
     [SerializeField] private Transform trackCellSpawnPlace;
 
@@ -29,7 +31,7 @@ public class ImageTracking : MonoBehaviour
     [SerializeField] private List<GameObject> ArObjects = new List<GameObject>();
 
     public string bookName;
-    public float bookPageNumber;
+    public int bookPageNumber;
 
     bool found = false;
 
@@ -58,27 +60,49 @@ public class ImageTracking : MonoBehaviour
     {
         if (found)
             return;
-
+        uiManager.OpenCanvas(CanvasName.TACK_LIST);
         foreach (var trackedImage in args.added)
         {
             string trackedImageName = trackedImage.referenceImage.name;
             Debug.Log ("Book name: " + trackedImageName);
             
+            // generating bookname, and bookpage number
             SplitBookName(trackedImageName);
-            if (jsonConverter != null)
-            {
-                trackData = jsonConverter.FetchTracks(bookName, bookPageNumber);
-                found = true;
 
-                for (int i = 0; i < trackData.Length; i++)
-                {
-                    string name = "Track " + trackData[i].trackNumber.ToString();
-                    GenerateTrack(trackData[i].url, name);
-                }
-            }
-            else if (jsonConverter == null)
+            int trackCount = 0;
+            
+            switch (bookName)
             {
-                Debug.Log("json converter not found");
+                case "TRW_Reader_1":
+                    bookData = jsonConverter.data.book_data[0];
+                    pageName = "Page " + bookPageNumber;
+                    break;
+                case "TRW_Reader_2":
+                    bookData = jsonConverter.data.book_data[1];
+                    pageName = "Page " + bookPageNumber;
+                    break;
+                default:
+                    bookData = jsonConverter.data.book_data[0];
+                    pageName = "Page " + bookPageNumber;
+                    break;
+            }
+            foreach (var pages in bookData.page)
+            {
+                if (pageName == pages.pageName)
+                {
+                    trackCount = pages.track.Length;
+                    for (int i = 0; i < trackCount; i++)
+                    {
+                        GenerateTrack
+                            (
+                                bookData.bookName,
+                                bookData.bookId,
+                                pages.pageId,
+                                pages.track[i].trackId,
+                                pages.track[i].url
+                            );
+                    }
+                }
             }
         }
     }
@@ -90,20 +114,19 @@ public class ImageTracking : MonoBehaviour
         string firstPart = parts[0];    
         string secondPart = parts[1];
 
-
-        // ui update for testing
-        trackedNameText.text = trackedImageName;
-        firstLastText.text = " Part one: " + firstPart + " \n Part two: " + secondPart;
-
         // get book name and page number to find track data from json
         bookName = firstPart;
-        bookPageNumber = float.Parse(secondPart);
+        bookNameText.text = bookName.Replace("_", " ");
+        bookPageNumber = int.Parse(secondPart);
     }
 
-    private void GenerateTrack(string trackUrl, string trackName)
+    private void GenerateTrack(string bookName,int _bookId, int _pageId, int trackid, string payloadURL)
     {
+        Debug.Log("Generate track");
         TrackCell generatedCell =  Instantiate(trackCell, trackCellSpawnPlace);
-        generatedCell.SetInformation(trackName, trackUrl);
+
+        // bookname, pageid, tackid, trackname, payloadurl
+        generatedCell.SetInformation(bookName, _bookId, _pageId, trackid, payloadURL);
     }
 }
 

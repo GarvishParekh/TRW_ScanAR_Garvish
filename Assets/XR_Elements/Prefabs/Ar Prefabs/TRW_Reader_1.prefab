@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4679411141156153249}
   - component: {fileID: 8145054290342871804}
   m_Layer: 0
-  m_Name: Reader_1
+  m_Name: TRW_Reader_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,4 +133,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoplayerData: {fileID: 11400000, guid: 87610cf3ac7e42f468fb9dbab680a142, type: 2}
   trackData: {fileID: 11400000, guid: 4eeaf8ebb2e175f4087c4be8de7f5b8d, type: 2}
-  bookID: 0
+  bookID: 4
