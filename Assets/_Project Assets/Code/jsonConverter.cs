@@ -14,7 +14,8 @@ public class jsonConverter : MonoBehaviour
     [Header("<size=15>USER JSON")]
     [SerializeField] private string jsonURL;
     public TrwData data = new TrwData();
-    [SerializeField] private string jsonString;
+
+    string jsonString;
 
     private void Awake()
     {
@@ -72,6 +73,7 @@ public class jsonConverter : MonoBehaviour
 
             jsonString = uwr.downloadHandler.text;  
             data = JsonUtility.FromJson<TrwData>(jsonString);
+            Debug.Log("JSON string: " + jsonString);
             
             yield return new WaitForSeconds(2);
             informationText.text += "\nLoading music files";

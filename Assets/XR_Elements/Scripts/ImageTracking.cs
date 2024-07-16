@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-
 using UnityEngine.XR.ARFoundation;
 using System.Collections.Generic;
 
@@ -13,10 +12,11 @@ public class ImageTracking : MonoBehaviour
     [Header("<size=15>USER INTERFACE")]
     [SerializeField] private TMP_Text trackedNameText;
     [SerializeField] private TMP_Text firstLastText;
+
     [SerializeField] private TMP_Text bookNameText;
+    [SerializeField] private TMP_Text pageNumberText;
 
     [Header("<size=15>TRACK DATA")]
-    [SerializeField] private string pageName;
     [SerializeField] private string playLoadUrl;
     [SerializeField] private BookData bookData = new BookData();
     [SerializeField] private TrackCell trackCell;
@@ -24,6 +24,7 @@ public class ImageTracking : MonoBehaviour
 
     [Header("<size=15>SCRIPTABLE")]
     [SerializeField] private VideoPlayerData videoPlayerData;
+    [SerializeField] private BookUiIData bookUiIData;
 
     [Space]
     private ARTrackedImageManager trackedImages;
@@ -59,7 +60,12 @@ public class ImageTracking : MonoBehaviour
     private void OnTackedImageChanges(ARTrackedImagesChangedEventArgs args)
     {
         if (found)
+        {
+            Debug.Log ("Image already tracked !");
             return;
+        }
+        found = true;
+
         uiManager.OpenCanvas(CanvasName.TACK_LIST);
         foreach (var trackedImage in args.added)
         {
@@ -69,41 +75,75 @@ public class ImageTracking : MonoBehaviour
             // generating bookname, and bookpage number
             SplitBookName(trackedImageName);
 
-            int trackCount = 0;
+            #region Recognized book name
             
             switch (bookName)
             {
-                case "TRW_Reader_1":
+                case "TRW_Starter":
                     bookData = jsonConverter.data.book_data[0];
-                    pageName = "Page " + bookPageNumber;
+                    break;
+                case "TRW_1":
+                    bookData = jsonConverter.data.book_data[1];
+                    break;
+                case "TRW_2":
+                    bookData = jsonConverter.data.book_data[2];
+                    break;
+                case "TRW_3":
+                    bookData = jsonConverter.data.book_data[3];
+                    break;
+                case "TRW_Reader_1":
+                    bookData = jsonConverter.data.book_data[4];
                     break;
                 case "TRW_Reader_2":
-                    bookData = jsonConverter.data.book_data[1];
-                    pageName = "Page " + bookPageNumber;
+                    bookData = jsonConverter.data.book_data[5];
                     break;
                 default:
                     bookData = jsonConverter.data.book_data[0];
-                    pageName = "Page " + bookPageNumber;
                     break;
             }
+            
+            // track list ui 
+            bookNameText.text = bookUiIData.trwBooks[bookData.bookId - 1].bookDisplayName;
+            #endregion
+
+            #region Recognize page name and generate tracks 
+
+            int trackCount = 0;
             foreach (var pages in bookData.page)
             {
-                if (pageName == pages.pageName)
+                if (bookPageNumber == pages.pageNumber)
                 {
+                    // track list ui 
+                    string pageId = pages.pageName;
+                    pageNumberText.text = pageId.Replace("_", ": ");
+
+                    // for generating pages
                     trackCount = pages.track.Length;
                     for (int i = 0; i < trackCount; i++)
                     {
                         GenerateTrack
-                            (
-                                bookData.bookName,
-                                bookData.bookId,
-                                pages.pageId,
-                                pages.track[i].trackId,
-                                pages.track[i].url
-                            );
+                        (
+                            #region Card information
+                            // for display
+                            bookData.bookName,
+                            // for payload url
+                            bookData.bookId,
+                            // to recognize page number
+                            pages.pageNumber,
+                            // unique ID for json payload
+                            pages.track[i].trackId,
+                            // lamda URL for json payload
+                            pages.track[i].url,
+                            // book cover for ui display 
+                            bookUiIData.trwBooks[bookData.bookId - 1].bookCoverSprite,
+                            // track name for ui display
+                            pages.track[i].trackName 
+                        #endregion
+                        );
                     }
                 }
             }
+            #endregion
         }
     }
 
@@ -116,17 +156,16 @@ public class ImageTracking : MonoBehaviour
 
         // get book name and page number to find track data from json
         bookName = firstPart;
-        bookNameText.text = bookName.Replace("_", " ");
         bookPageNumber = int.Parse(secondPart);
     }
 
-    private void GenerateTrack(string bookName,int _bookId, int _pageId, int trackid, string payloadURL)
+    private void GenerateTrack(string bookName,int _bookId, int _pageId, int trackid, string payloadURL, Sprite _coverImage, string _trackName)
     {
         Debug.Log("Generate track");
         TrackCell generatedCell =  Instantiate(trackCell, trackCellSpawnPlace);
 
         // bookname, pageid, tackid, trackname, payloadurl
-        generatedCell.SetInformation(bookName, _bookId, _pageId, trackid, payloadURL);
+        generatedCell.SetInformation(bookName, _bookId, _pageId, trackid, payloadURL, _coverImage, _trackName);
     }
 }
 

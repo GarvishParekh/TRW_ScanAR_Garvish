@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class TrwData 
@@ -19,7 +20,7 @@ public class BookData
 [Serializable]
 public class PageData
 {
-    public int pageId;
+    public int pageNumber;
     public string pageName;
     public TracksData[] track;
 }
@@ -28,5 +29,6 @@ public class PageData
 public class TracksData
 {
     public int trackId;
+    public string trackName;
     public string url;
 }

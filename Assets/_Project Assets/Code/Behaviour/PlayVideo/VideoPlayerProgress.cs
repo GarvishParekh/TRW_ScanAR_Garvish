@@ -24,6 +24,7 @@ public class VideoPlayerProgress : MonoBehaviour, IBeginDragHandler, IDragHandle
     [Space]
     [SerializeField] private CanvasGroup playbackUI;
     [SerializeField] private GameObject buttonUI;
+    [SerializeField] private GameObject videoName;
     [SerializeField] private GameObject halfScreenTouch;
     /// <summary>
     /// Is seeking through the video enabled?
@@ -191,6 +192,7 @@ public class VideoPlayerProgress : MonoBehaviour, IBeginDragHandler, IDragHandle
         switch (playbackInfo)
         {
             case PlaybackInfo.SHOW:
+                videoName.SetActive(true);
                 buttonUI.SetActive(true);
                 playbackUI.alpha = 1.0f;
 
@@ -198,6 +200,7 @@ public class VideoPlayerProgress : MonoBehaviour, IBeginDragHandler, IDragHandle
             case PlaybackInfo.HIDE:
                 playbackUI.alpha = 0.4f;
                 buttonUI.SetActive(false);
+                videoName.SetActive(false);
 
                 break;
         }
