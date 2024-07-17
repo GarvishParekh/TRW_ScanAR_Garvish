@@ -22,6 +22,9 @@ public class TrackCell : MonoBehaviour
     [SerializeField] private string trackName = string.Empty;
     [SerializeField] private TMP_Text trackNameText;
 
+    CanvasGroup cardCG;
+
+
     [Header("<size=15>JSON PAYLOAD")]
     [SerializeField] private int bookId;
     [SerializeField] private int pageID;
@@ -39,7 +42,13 @@ public class TrackCell : MonoBehaviour
     [SerializeField] private string postURL;
 
     private void Start()
-        => sfxManager = SfxManager.instance;
+    {
+        sfxManager = SfxManager.instance;
+
+        cardCG = GetComponent<CanvasGroup>();
+        cardCG.alpha = 0;
+        SpawningAnimation();
+    }
 
     public void SetInformation(string _bookName, int _bookId, int _PageId, int _trackId, string _url, Sprite _coverImage, string _trackName)
     {
@@ -76,6 +85,11 @@ public class TrackCell : MonoBehaviour
         sfxManager?.PlayClickSound();
 
         StartCoroutine(nameof(Upload));
+    }
+
+    private void SpawningAnimation()
+    {
+        LeanTween.alphaCanvas(cardCG, 1, (transform.GetSiblingIndex() + 2) * 0.25f).setEaseInOutSine().setDelay(0.5f);
     }
 
     // AR foundation cannot re-scan without reseting XR settings 

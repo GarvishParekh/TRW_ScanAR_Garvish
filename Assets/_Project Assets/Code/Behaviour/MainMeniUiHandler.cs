@@ -7,7 +7,8 @@ public class MainMeniUiHandler : MonoBehaviour
     UiManager uiManager;
     SfxManager sfxManager;
 
-    [Header ("<size=15> [SCRIPTABLE]")]
+    [Header("<size=15> [SCRIPTABLE]")]
+    [SerializeField] private BookUiIData bookUiData;
     [SerializeField] private UrlCollection urlCollection;
     [SerializeField] private ApplicationSettings applicationSettings;
 
@@ -92,4 +93,7 @@ public class MainMeniUiHandler : MonoBehaviour
             uiManager.OpenPopup(CanvasName.UPDATE_AVAILABLE);
         }
     }
+
+    public void CardSelection(int _bookIndex)
+        => PlayerPrefs.SetInt(ConstantKeys.SELECTEDBOOK, _bookIndex);
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine.Video;
+using Unity.VisualScripting;
 
 public class VideplayMenuUIHandler : MonoBehaviour
 {
@@ -33,7 +34,16 @@ public class VideplayMenuUIHandler : MonoBehaviour
     private void Start()
     {
         SetVideoName();
-        ShowVideo(showVideo);
+
+        switch (videoPlayerData.videoPlayerType)
+        {
+            case VideoPlayerType.AUDIO:
+                ShowVideo(false);
+                break;
+            case VideoPlayerType.VIDEO:
+                ShowVideo(true);
+                break;
+        }
     }
 
     public void BackButton()

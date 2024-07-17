@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6037102668268778952}
   - component: {fileID: 3754278238078737430}
   - component: {fileID: 7174149062438159638}
+  - component: {fileID: 8285609772084815158}
   m_Layer: 0
   m_Name: Track Card
   m_TagString: Untagged
@@ -151,13 +152,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videplayerData: {fileID: 11400000, guid: 87610cf3ac7e42f468fb9dbab680a142, type: 2}
   bookUiData: {fileID: 11400000, guid: 633fafb86ac9aa141970ab44d7d3d4dd, type: 2}
-  trackNameText: {fileID: 3636365296889349335}
   bookCoverPage: {fileID: 3712620693816233547}
   bookName: 
+  trackName: 
+  trackNameText: {fileID: 3636365296889349335}
   bookId: 0
   pageID: 0
   trackID: 0
-  trackName: 
   jsonPayload: '{"bookId": 1, "pageId": 1,"trackId": 1, "path": "TRW_Reader_2/Page_1/Track_1/TRW_Reader_2_Page_1_V.m4v"}'
   postURL: https://fjhvpt2agopjiry532bdnxmbye0disxo.lambda-url.ap-south-1.on.aws
 --- !u!114 &7174149062438159638
@@ -175,6 +176,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.29803923}
   m_EffectDistance: {x: 0, y: -10}
   m_UseGraphicAlpha: 1
+--- !u!225 &8285609772084815158
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3205178362980252996}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3289714697688584495
 GameObject:
   m_ObjectHideFlags: 0

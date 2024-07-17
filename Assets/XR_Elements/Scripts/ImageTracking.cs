@@ -33,11 +33,13 @@ public class ImageTracking : MonoBehaviour
 
     public string bookName;
     public int bookPageNumber;
+    public int selectedBookIndex = 0;
 
     bool found = false;
 
     private void Awake()
     {
+        selectedBookIndex = PlayerPrefs.GetInt(ConstantKeys.SELECTEDBOOK);
         trackedImages = GetComponent<ARTrackedImageManager>();
     }
 
@@ -64,9 +66,7 @@ public class ImageTracking : MonoBehaviour
             Debug.Log ("Image already tracked !");
             return;
         }
-        found = true;
 
-        uiManager.OpenCanvas(CanvasName.TACK_LIST);
         foreach (var trackedImage in args.added)
         {
             string trackedImageName = trackedImage.referenceImage.name;
@@ -80,28 +80,63 @@ public class ImageTracking : MonoBehaviour
             switch (bookName)
             {
                 case "TRW_Starter":
-                    bookData = jsonConverter.data.book_data[0];
+                    if (selectedBookIndex == 1)
+                    {
+                        bookData = jsonConverter.data.book_data[0];
+                        found = true;
+                    }
+                    else
+                        return;
                     break;
                 case "TRW_1":
-                    bookData = jsonConverter.data.book_data[1];
+                    if (selectedBookIndex == 2)
+                    {
+                        bookData = jsonConverter.data.book_data[1];
+                        found = true;
+                    }
+                    else
+                        return;
                     break;
                 case "TRW_2":
-                    bookData = jsonConverter.data.book_data[2];
+                    if (selectedBookIndex == 3)
+                    {
+                        bookData = jsonConverter.data.book_data[2];
+                        found = true;
+                    }
+                    else
+                        return;
                     break;
                 case "TRW_3":
-                    bookData = jsonConverter.data.book_data[3];
+                    if (selectedBookIndex == 4)
+                    {
+                        bookData = jsonConverter.data.book_data[3];
+                        found = true;
+                    }
+                    else
+                        return;
                     break;
                 case "TRW_Reader_1":
-                    bookData = jsonConverter.data.book_data[4];
+                    if (selectedBookIndex == 5)
+                    {
+                        bookData = jsonConverter.data.book_data[4];
+                        found = true;
+                    }
+                    else
+                        return;
                     break;
                 case "TRW_Reader_2":
-                    bookData = jsonConverter.data.book_data[5];
-                    break;
-                default:
-                    bookData = jsonConverter.data.book_data[0];
+                    if (selectedBookIndex == 6)
+                    {
+                        bookData = jsonConverter.data.book_data[5];
+                        found = true;
+                    }
+                    else
+                        return;
                     break;
             }
             
+            uiManager.OpenCanvas(CanvasName.TACK_LIST);
+
             // track list ui 
             bookNameText.text = bookUiIData.trwBooks[bookData.bookId - 1].bookDisplayName;
             #endregion
