@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMeniUiHandler : MonoBehaviour
 {
+    jsonConverter jsonConverter;
     UiManager uiManager;
     SfxManager sfxManager;
 
@@ -17,29 +18,29 @@ public class MainMeniUiHandler : MonoBehaviour
 
     private void Start()
     {
+        jsonConverter = jsonConverter.instance;
         uiManager = UiManager.instance;
         sfxManager = SfxManager.instance;
 
         uiManager.OpenCanvas(CanvasName.MAIN_MENU);
 
         CheckApplicationVersion();
-    }
 
-    public void OpenWarningCanvas()
-    {
-        uiManager.OpenPopup(CanvasName.WARNING);
-        sfxManager.PlayClickSound();
+        if (jsonConverter.GetAppUsageSeenStatus() == 0)
+        {
+            uiManager.OpenPopup(CanvasName.WARNING);
+            jsonConverter.AppUsageSeen();
+        }
     }
 
     public void _AgreeButton()
     {
         uiManager.ClosePopup(CanvasName.WARNING);
-        sfxManager.PlayClickSound();
-        Invoke(nameof(ChangeToScanningScene), 0.2f);
     }
 
-    public void ChangeToScanningScene()
+    public void _ChangeToScanningScene()
     {
+        sfxManager.PlayClickSound();
         SceneManager.LoadScene(SceneData.SCANNING);
     }
 

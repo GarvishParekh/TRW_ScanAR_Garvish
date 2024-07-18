@@ -161,6 +161,12 @@ MonoBehaviour:
   trackID: 0
   jsonPayload: '{"bookId": 1, "pageId": 1,"trackId": 1, "path": "TRW_Reader_2/Page_1/Track_1/TRW_Reader_2_Page_1_V.m4v"}'
   postURL: https://fjhvpt2agopjiry532bdnxmbye0disxo.lambda-url.ap-south-1.on.aws
+  backgroundColorImage: {fileID: 8006496347955746266}
+  iconIndication: {fileID: 1964650776631799937}
+  backgroundColorAudio: {r: 0.9529412, g: 0.57254905, b: 0, a: 0.8}
+  backgroundColorVideo: {r: 0.9529412, g: 0.4509804, b: 0, a: 0.8}
+  musicIcon: {fileID: 21300000, guid: 5f943726a78fe0f47be5c1bfd7ea8e1e, type: 3}
+  videoIcon: {fileID: 21300000, guid: 2070943827779cf42a483a17a2dc9812, type: 3}
 --- !u!114 &7174149062438159638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,7 +393,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2070943827779cf42a483a17a2dc9812, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f943726a78fe0f47be5c1bfd7ea8e1e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -492,7 +498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9529412, g: 0.57254905, b: 0, a: 0.6509804}
+  m_Color: {r: 0.9529412, g: 0.57254905, b: 0, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -567,7 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9529412, g: 0.57254905, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -41,6 +41,18 @@ public class TrackCell : MonoBehaviour
 
     [SerializeField] private string postURL;
 
+    private void OnEnable()
+    {
+        ScanningUiHandler.LoadAudio += ChangeToMusicOnly;
+        ScanningUiHandler.LoadVideo += ChangeToVideo;
+    }
+
+    private void OnDisable()
+    {
+        ScanningUiHandler.LoadAudio -= ChangeToMusicOnly;
+        ScanningUiHandler.LoadVideo -= ChangeToVideo;
+    }
+
     private void Start()
     {
         sfxManager = SfxManager.instance;
@@ -125,6 +137,32 @@ public class TrackCell : MonoBehaviour
                 SceneManager.LoadScene(SceneData.VIDEOPLAYER);
             }
         }
+    }
+
+
+    [Space]
+    [SerializeField] private Image backgroundColorImage;
+    [SerializeField] private Image iconIndication;
+
+    [Space]
+    [SerializeField] private Color backgroundColorAudio;
+    [SerializeField] private Color backgroundColorVideo;
+
+    [Space]
+    [SerializeField] private Sprite musicIcon;
+    [SerializeField] private Sprite videoIcon;
+
+
+    private void ChangeToMusicOnly()
+    {
+        backgroundColorImage.color = backgroundColorAudio;
+        iconIndication.sprite = musicIcon;
+    }
+
+    private void ChangeToVideo()
+    {
+        backgroundColorImage.color = backgroundColorVideo;
+        iconIndication.sprite = videoIcon;
     }
 }
 

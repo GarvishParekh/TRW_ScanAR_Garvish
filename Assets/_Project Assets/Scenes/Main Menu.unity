@@ -444,7 +444,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 963875885}
         m_TargetAssemblyTypeName: MainMeniUiHandler, Assembly-CSharp
-        m_MethodName: OpenWarningCanvas
+        m_MethodName: _ChangeToScanningScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4531,6 +4531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d28bf14c25dfd24aa3a49b8c2df6911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appStatus: {fileID: 11400000, guid: b70dfffa681f5a04aa7a0de7631ba0b2, type: 2}
   bookUiData: {fileID: 11400000, guid: 633fafb86ac9aa141970ab44d7d3d4dd, type: 2}
   urlCollection: {fileID: 11400000, guid: eb81bf1985a8bec4c8b7483dc0f4fd95, type: 2}
   applicationSettings: {fileID: 11400000, guid: 4aa58c0fd2f85da45916ca53cad518d6, type: 2}
@@ -5287,7 +5288,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 963875885}
         m_TargetAssemblyTypeName: MainMeniUiHandler, Assembly-CSharp
-        m_MethodName: OpenWarningCanvas
+        m_MethodName: _ChangeToScanningScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6183,7 +6184,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 963875885}
         m_TargetAssemblyTypeName: MainMeniUiHandler, Assembly-CSharp
-        m_MethodName: OpenWarningCanvas
+        m_MethodName: _ChangeToScanningScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6405,7 +6406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1367052702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7162,7 +7163,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 963875885}
         m_TargetAssemblyTypeName: MainMeniUiHandler, Assembly-CSharp
-        m_MethodName: OpenWarningCanvas
+        m_MethodName: _ChangeToScanningScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7842,7 +7843,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 963875885}
         m_TargetAssemblyTypeName: MainMeniUiHandler, Assembly-CSharp
-        m_MethodName: OpenWarningCanvas
+        m_MethodName: _ChangeToScanningScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9945,7 +9946,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 963875885}
         m_TargetAssemblyTypeName: MainMeniUiHandler, Assembly-CSharp
-        m_MethodName: OpenWarningCanvas
+        m_MethodName: _ChangeToScanningScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

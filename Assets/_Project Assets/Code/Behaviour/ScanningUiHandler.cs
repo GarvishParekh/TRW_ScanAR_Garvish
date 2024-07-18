@@ -2,9 +2,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System;
 
 public class ScanningUiHandler : MonoBehaviour
 {
+    public static Action LoadAudio;
+    public static Action LoadVideo;
+
     UiManager uiManager;
     SfxManager sfxManager;
 
@@ -13,6 +18,7 @@ public class ScanningUiHandler : MonoBehaviour
     [Header("<size=15>UI")]
     [SerializeField] private Image audioImage;
     [SerializeField] private TMP_Text audioText;
+    [SerializeField] private List<TrackCell> spawnedCell;
 
     [Space]
     [SerializeField] private Image videoImage;
@@ -73,6 +79,8 @@ public class ScanningUiHandler : MonoBehaviour
 
                 videoImage.color = unSelectedColorImage;
                 videoText.color = unSelectedColorText;
+
+                LoadAudio?.Invoke();
                 break;
             case VideoPlayerType.VIDEO:
                 videoPlayerData.videoPlayerType = VideoPlayerType.VIDEO;
@@ -82,6 +90,8 @@ public class ScanningUiHandler : MonoBehaviour
 
                 videoImage.color = selectedColorImage;
                 videoText.color = selectedColorText;
+
+                LoadVideo?.Invoke();
                 break;
         }
     }

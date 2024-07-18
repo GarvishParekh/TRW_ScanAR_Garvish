@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -19,9 +20,11 @@ public enum PlaybackInfo
     HIDE
 }
 
+[Serializable]
 [CreateAssetMenu(fileName = "Application Status", menuName = "Scriptable/Application Status")]
 public class AppStatus : ScriptableObject
 {
+    [Space]
     public ScreenStatus screenStatus;
     public VideoStatus videoStatus;
     public PlaybackInfo playbackInfo;

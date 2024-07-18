@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.EventSystems;
-using Unity.Profiling;
 using System;
-
+using System.Security.Cryptography;
+using UnityEngine.InputSystem.HID;
 
 /// <summary>
 /// A progress bar for VideoPlayer
@@ -26,6 +26,12 @@ public class VideoPlayerProgress : MonoBehaviour, IBeginDragHandler, IDragHandle
     [SerializeField] private GameObject buttonUI;
     [SerializeField] private GameObject videoName;
     [SerializeField] private GameObject halfScreenTouch;
+
+    [Header ("<size=15>USER INTERFACE")]
+    [SerializeField] private GameObject pauseHolder;
+    [SerializeField] private GameObject restartHolder;
+
+    float lastTimePlayed;
     /// <summary>
     /// Is seeking through the video enabled?
     /// </summary>
@@ -58,8 +64,26 @@ public class VideoPlayerProgress : MonoBehaviour, IBeginDragHandler, IDragHandle
         {
             m_PlaybackProgress.fillAmount =
                 (float)(videoPlayer.length > 0 ? videoPlayer.time / videoPlayer.length : 0);
-            loadingImage.gameObject.SetActive(false);
         }
+
+        //when the video is playing, check each time that the video image get update based in the video's frame rate
+        if (videoPlayer.isPlaying && (Time.frameCount % (int)(videoPlayer.frameRate + 1)) == 0)
+        {
+            //if the video time is the same as the previous check, that means it's buffering cuz the video is Playing.
+            if (lastTimePlayed == videoPlayer.time)//buffering
+            {
+                Debug.Log("buffering");
+                loadingImage.gameObject.SetActive(true);
+            }
+            else//not buffering
+            {
+                Debug.Log("Not buffering");
+                loadingImage.gameObject.SetActive(false);
+            }
+            lastTimePlayed = (float)videoPlayer.time;
+        }
+
+        /*
         else
         {
             switch (appStatus.videoStatus)
@@ -69,6 +93,7 @@ public class VideoPlayerProgress : MonoBehaviour, IBeginDragHandler, IDragHandle
                     break;
             }
         }
+        */
         videoSeekTime.text = TimeSpan.FromSeconds((int)videoPlayer.time) +  " / " + TimeSpan.FromSeconds((int)videoPlayer.length);
     }
 
@@ -201,8 +226,28 @@ public class VideoPlayerProgress : MonoBehaviour, IBeginDragHandler, IDragHandle
                 playbackUI.alpha = 0.4f;
                 buttonUI.SetActive(false);
                 videoName.SetActive(false);
-
                 break;
         }
+    }
+
+    void Start() 
+    { 
+        videoPlayer.loopPointReached += CheckOver; 
+    }
+
+    void CheckOver(VideoPlayer vp)
+    {
+        restartHolder.SetActive(true);
+        pauseHolder.SetActive(false);
+        print("Video Is Over");
+    }
+
+    public void _RestartVideo()
+    {
+        videoPlayer.Stop();
+        videoPlayer.Play();
+
+        restartHolder.SetActive(false);
+        pauseHolder.SetActive(true);
     }
 }

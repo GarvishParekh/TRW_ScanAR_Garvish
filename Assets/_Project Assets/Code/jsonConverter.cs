@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 public class jsonConverter : MonoBehaviour
 {
     public static jsonConverter instance;
+
+    [Header("<size=15>APP INFO")]
+    [SerializeField] private int appUsageInfoSeen = 0;
+    
     [Header("<size=15>USER INTERFACE")]
     [SerializeField] private TMP_Text informationText;
 
@@ -85,4 +89,13 @@ public class jsonConverter : MonoBehaviour
             SceneManager.LoadScene(SceneData.MAINMENU);
         }
     }
+
+    public void AppUsageSeen()
+        => appUsageInfoSeen = 1;
+
+    public int GetAppUsageSeenStatus()
+    {
+        return appUsageInfoSeen;
+    }
+
 }
