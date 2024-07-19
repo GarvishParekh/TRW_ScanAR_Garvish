@@ -1,9 +1,9 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Video;
+using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using UnityEngine.Video;
-using Unity.VisualScripting;
 
 public class VideplayMenuUIHandler : MonoBehaviour
 {
@@ -27,7 +27,29 @@ public class VideplayMenuUIHandler : MonoBehaviour
 
     private void Awake()
     {
+        StartCoroutine(nameof(PlayTheVideo));
+    }
+
+    private IEnumerator PlayTheVideo()
+    {
+
+        //Disable Play on Awake for both Video and Audio
+        videoPlayer.playOnAwake = false;
+
+        //We want to play from video clip not from url
         videoPlayer.url = videoPlayerData.videoDirectLink;
+        //videoPlayer.source = VideoSource.VideoClip;
+
+        //Set video To Play then prepare Audio to prevent Buffering
+        videoPlayer.Prepare();
+
+        //Wait until video is prepared
+        while (!videoPlayer.isPrepared)
+        {
+            Debug.Log("Preparing Video");
+            yield return null;
+        }
+
         videoPlayer.Play();
     }
 
