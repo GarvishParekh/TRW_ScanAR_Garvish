@@ -527,12 +527,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce2a8f6accbd8347aef394abf8289a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appUsageInfoSeen: 0
   informationText: {fileID: 2038466632}
-  jsonURL: https://trw-scanar.s3.ap-south-1.amazonaws.com/API_CONFIG/BookMaster.json
+  jsonURL: https://d3su6wg4malnvf.cloudfront.net/API_CONFIG/BookMaster.json
   data:
     android_version: 
     ios_version: 
     book_data: []
+  previousScannedBookName: 
 --- !u!1 &1300445301
 GameObject:
   m_ObjectHideFlags: 0
