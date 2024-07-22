@@ -3949,8 +3949,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   videoPlayerData: {fileID: 11400000, guid: 87610cf3ac7e42f468fb9dbab680a142, type: 2}
+  imageTracking: {fileID: 8216881069971972447}
   audioImage: {fileID: 318975370}
   audioText: {fileID: 954926229}
+  spawnedCell: []
   videoImage: {fileID: 1416064940}
   videoText: {fileID: 279131866}
   selectedColorImage: {r: 0.30980393, g: 0.19215688, b: 0.654902, a: 1}
@@ -4750,6 +4752,7 @@ MonoBehaviour:
   ArObjects: []
   bookName: 
   bookPageNumber: 0
+  selectedBookIndex: 0
 --- !u!4 &8998485828680674522
 Transform:
   m_ObjectHideFlags: 0

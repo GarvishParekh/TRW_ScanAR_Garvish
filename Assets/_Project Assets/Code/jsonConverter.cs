@@ -20,6 +20,7 @@ public class jsonConverter : MonoBehaviour
     public TrwData data = new TrwData();
 
     string jsonString;
+    public string previousScannedBookName = string.Empty;
 
     private void Awake()
     {

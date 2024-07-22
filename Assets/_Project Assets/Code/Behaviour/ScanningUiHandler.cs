@@ -1,9 +1,9 @@
 using TMPro;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using System;
 
 public class ScanningUiHandler : MonoBehaviour
 {
@@ -12,8 +12,12 @@ public class ScanningUiHandler : MonoBehaviour
 
     UiManager uiManager;
     SfxManager sfxManager;
+    jsonConverter converter;
 
     [SerializeField] private VideoPlayerData videoPlayerData;
+
+    [Header("<size=15>SCRIPTS")]
+    [SerializeField] private ImageTracking imageTracking;
 
     [Header("<size=15>UI")]
     [SerializeField] private Image audioImage;
@@ -37,13 +41,23 @@ public class ScanningUiHandler : MonoBehaviour
     {
         uiManager = UiManager.instance;
         sfxManager = SfxManager.instance;
+        converter = jsonConverter.instance;
 
-        uiManager.OpenCanvas(CanvasName.SCANNING);
+        if (converter.previousScannedBookName == string.Empty)
+        {
+            uiManager.OpenCanvas(CanvasName.SCANNING);
+        }
+        else
+        {
+            imageTracking.NoNeedToScan();
+            imageTracking.GenerateBookData(converter.previousScannedBookName);
+        }
         ChangeToAudio();
     }
 
     public void _BackToMainMenu()
     {
+        converter.previousScannedBookName = string.Empty;
         ResetXRSettings();
         SceneManager.LoadScene(SceneData.MAINMENU);
 
@@ -52,7 +66,7 @@ public class ScanningUiHandler : MonoBehaviour
 
     public void _ScanAgain()
     {
-
+        converter.previousScannedBookName = string.Empty;
         ResetXRSettings();
         sfxManager?.PlayClickSound();
 

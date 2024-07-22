@@ -70,116 +70,123 @@ public class ImageTracking : MonoBehaviour
         foreach (var trackedImage in args.added)
         {
             string trackedImageName = trackedImage.referenceImage.name;
-            Debug.Log ("Book name: " + trackedImageName);
-            
-            // generating bookname, and bookpage number
-            SplitBookName(trackedImageName);
+            jsonConverter.previousScannedBookName = trackedImageName;
+            GenerateBookData(trackedImageName);
+        }
+    }
 
-            #region Recognized book name
-            
-            switch (bookName)
-            {
-                case "TRW_Starter":
-                    if (selectedBookIndex == 1)
-                    {
-                        bookData = jsonConverter.data.book_data[0];
-                        found = true;
-                    }
-                    else
-                        return;
-                    break;
-                case "TRW_1":
-                    if (selectedBookIndex == 2)
-                    {
-                        bookData = jsonConverter.data.book_data[1];
-                        found = true;
-                    }
-                    else
-                        return;
-                    break;
-                case "TRW_2":
-                    if (selectedBookIndex == 3)
-                    {
-                        bookData = jsonConverter.data.book_data[2];
-                        found = true;
-                    }
-                    else
-                        return;
-                    break;
-                case "TRW_3":
-                    if (selectedBookIndex == 4)
-                    {
-                        bookData = jsonConverter.data.book_data[3];
-                        found = true;
-                    }
-                    else
-                        return;
-                    break;
-                case "TRW_Reader_1":
-                    if (selectedBookIndex == 5)
-                    {
-                        bookData = jsonConverter.data.book_data[4];
-                        found = true;
-                    }
-                    else
-                        return;
-                    break;
-                case "TRW_Reader_2":
-                    if (selectedBookIndex == 6)
-                    {
-                        bookData = jsonConverter.data.book_data[5];
-                        found = true;
-                    }
-                    else
-                        return;
-                    break;
-            }
-            
-            uiManager.OpenCanvas(CanvasName.TACK_LIST);
+    public void GenerateBookData(string _markerName )
+    {
+        GetSingletonScripts();
+        Debug.Log("Book name: " + _markerName);
 
-            // track list ui 
-            bookNameText.text = bookUiIData.trwBooks[bookData.bookId - 1].bookDisplayName;
-            #endregion
+        // generating bookname, and bookpage number
+        SplitBookName(_markerName);
 
-            #region Recognize page name and generate tracks 
+        #region Recognized book name
 
-            int trackCount = 0;
-            foreach (var pages in bookData.page)
-            {
-                if (bookPageNumber == pages.pageNumber)
+        switch (bookName)
+        {
+            case "TRW_Starter":
+                if (selectedBookIndex == 1)
                 {
-                    // track list ui 
-                    string pageId = pages.pageName;
-                    pageNumberText.text = pageId.Replace("_", ": ");
+                    bookData = jsonConverter.data.book_data[0];
+                    found = true;
+                }
+                else
+                    return;
+                break;
+            case "TRW_1":
+                if (selectedBookIndex == 2)
+                {
+                    bookData = jsonConverter.data.book_data[1];
+                    found = true;
+                }
+                else
+                    return;
+                break;
+            case "TRW_2":
+                if (selectedBookIndex == 3)
+                {
+                    bookData = jsonConverter.data.book_data[2];
+                    found = true;
+                }
+                else
+                    return;
+                break;
+            case "TRW_3":
+                if (selectedBookIndex == 4)
+                {
+                    bookData = jsonConverter.data.book_data[3];
+                    found = true;
+                }
+                else
+                    return;
+                break;
+            case "TRW_Reader_1":
+                if (selectedBookIndex == 5)
+                {
+                    bookData = jsonConverter.data.book_data[4];
+                    found = true;
+                }
+                else
+                    return;
+                break;
+            case "TRW_Reader_2":
+                if (selectedBookIndex == 6)
+                {
+                    bookData = jsonConverter.data.book_data[5];
+                    found = true;
+                }
+                else
+                    return;
+                break;
+        }
 
-                    // for generating pages
-                    trackCount = pages.track.Length;
-                    for (int i = 0; i < trackCount; i++)
-                    {
-                        GenerateTrack
-                        (
-                            #region Card information
-                            // for display
-                            bookData.bookName,
-                            // for payload url
-                            bookData.bookId,
-                            // to recognize page number
-                            pages.pageNumber,
-                            // unique ID for json payload
-                            pages.track[i].trackId,
-                            // lamda URL for json payload
-                            pages.track[i].url,
-                            // book cover for ui display 
-                            bookUiIData.trwBooks[bookData.bookId - 1].bookCoverSprite,
-                            // track name for ui display
-                            pages.track[i].trackName 
-                        #endregion
-                        );
-                    }
+        uiManager.OpenCanvas(CanvasName.TACK_LIST);
+
+        // track list ui 
+        bookNameText.text = bookUiIData.trwBooks[bookData.bookId - 1].bookDisplayName;
+        #endregion
+
+        #region Recognize page name and generate tracks 
+
+        int trackCount = 0;
+        foreach (var pages in bookData.page)
+        {
+            if (bookPageNumber == pages.pageNumber)
+            {
+                // track list ui 
+                string pageId = pages.pageName;
+                pageNumberText.text = pageId.Replace("_", ": ");
+
+                // for generating pages
+                trackCount = pages.track.Length;
+                for (int i = 0; i < trackCount; i++)
+                {
+                    GenerateTrack
+                    (
+                    #region Card information
+                        // for display
+                        bookData.bookName,
+                        // for payload url
+                        bookData.bookId,
+                        // to recognize page number
+                        pages.pageNumber,
+                        // unique ID for json payload
+                        pages.track[i].trackId,
+                        // lamda URL for json payload
+                        pages.track[i].url,
+                        // book cover for ui display 
+                        bookUiIData.trwBooks[bookData.bookId - 1].bookCoverSprite,
+                        // track name for ui display
+                        pages.track[i].trackName
+                    #endregion
+                    );
                 }
             }
-            #endregion
         }
+        #endregion
     }
 
     private void SplitBookName(string trackedImageName)
@@ -202,6 +209,9 @@ public class ImageTracking : MonoBehaviour
         // bookname, pageid, tackid, trackname, payloadurl
         generatedCell.SetInformation(bookName, _bookId, _pageId, trackid, payloadURL, _coverImage, _trackName);
     }
+
+    public void NoNeedToScan()
+        => found = true;
 }
 
 
