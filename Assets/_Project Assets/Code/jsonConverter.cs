@@ -14,6 +14,7 @@ public class jsonConverter : MonoBehaviour
     
     [Header("<size=15>USER INTERFACE")]
     [SerializeField] private TMP_Text informationText;
+    [SerializeField] private TMP_Text applicationVersionText;
 
     [Header("<size=15>USER JSON")]
     [SerializeField] private string jsonURL;
@@ -25,9 +26,7 @@ public class jsonConverter : MonoBehaviour
     private void Awake()
     {
         if (instance != null && instance == this)
-        {
             Destroy(gameObject);    
-        }
         else
         {
             instance = this;
@@ -38,17 +37,14 @@ public class jsonConverter : MonoBehaviour
     void Start()
     {
         informationText.text = "Please wait... \nChecking internet connection.....";
+        applicationVersionText.text = "Version " + Application.version;
         StartCoroutine(checkInternetConnection((isConnected) =>
         {
             // handle connection status here
             if (isConnected)
-            {
                 StartCoroutine(nameof(FetchBookData), jsonURL);
-            }
             else
-            {
                 informationText.text += "\nPlease check your internet connection!";
-            }
         }));
     }
 
@@ -69,9 +65,7 @@ public class jsonConverter : MonoBehaviour
         yield return uwr.SendWebRequest();
 
         if (uwr.isNetworkError)
-        {
             Debug.Log("Error While Sending: " + uwr.error);
-        }
         else
         {
             informationText.text += "\nFetching books";

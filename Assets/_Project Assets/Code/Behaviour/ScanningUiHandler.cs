@@ -44,9 +44,7 @@ public class ScanningUiHandler : MonoBehaviour
         converter = jsonConverter.instance;
 
         if (converter.previousScannedBookName == string.Empty)
-        {
             uiManager.OpenCanvas(CanvasName.SCANNING);
-        }
         else
         {
             imageTracking.NoNeedToScan();
@@ -71,7 +69,6 @@ public class ScanningUiHandler : MonoBehaviour
         sfxManager?.PlayClickSound();
 
         SceneManager.LoadScene(SceneData.SCANNING);
-
     }
 
     private void ResetXRSettings()
